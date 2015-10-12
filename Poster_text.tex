@@ -1,0 +1,177 @@
+\documentclass[11pt]{amsart}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{natbib}
+%\usepackage{xebaposter}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+
+\title{Brief Article}
+\author{The Author}
+%\date{}                                           % Activate to display a given date or no date
+
+\begin{document}
+%\begin{poster} {
+%\maketitle
+%\section{}
+%\subsection{}
+
+\section{Contribution}
+	We present a modeling framework aimed at studying the contributions of genes and the environment to phenotypic variation in high dimensions. Specifically, we are interested in leveraging high-dimensional phenotypes to study the combined effects of multiple factors on traits like yield in crops, fitness in natural populations, or health in patients. Our approach combines two well established principles: 
+	\begin{itemize}
+	\item That biological systems tend to be modular in organization. 
+	\item That appropriately designed and analyzed experiments are necessary to address complex experimental questions.
+	\end{itemize}
+
+We begin with the classic linear mixed effects model that forms the basis for the analysis of a wide range of experimental and observational studies.	But whereas a traditional multivariate mixed model becomes intractable and highly sensitive with more than a handful of traits, our model uses a sparse factor structure to focus only on the strongest modules in the data. This builds upon our earlier genetic sparse factor model \citep{Runcie:2013ky}. 
+We have built an efficient Bayesian MCMC algorithm to fit the model that scales well both computationally and numerically to dimensions relevant to modern phenotype-centric datasets, and generates descriptions of modules that are interpretable with respect to the environmental or genetic factors. 
+
+
+%The unifying feature
+%
+%	, and 
+%	begins with the principle that biological systems tend to be modular in organization. 
+%	
+%	Modularity implies that that the high-dimensional phenotype can be decomposed into a set of lower-dimensional traits. 
+%	We leverage this modularity by searching for 
+%	begin with the classic linear mixed effects model that forms the basis for the analysis of a wide range of experimental and observational studies. But whereas a traditional multivariate mixed model becomes intractable and highly sensitive with more than a handful of traits, our model should scale well both computationally and numerically to dimensions relevant to modern phenotype-centric datasets. The unifying feature
+%	. In extending the analysis from one to many dimensions
+%	
+%	Specifically, we try to identify 
+%	genetic and environmental effects 
+%	, and that this modularity is the key to interpreting the function of their interconnected parts
+%	applicable to the study of phenotype data in high dimensions. Specifically, 
+%	high-dimensional 
+%	for the study of high-dimensional phenotypic responses to 
+%	robust and parsimonious 
+%	
+%\section{Introduction}
+%	Technological advances are leading to a revolution in the collection of phenotype data - from the various *seq technologies (ex RNAseq, ChIPseq, DNase-Seq), to proteomics, metabalomcs, and 3D and hyperspectral imaging. These high-dimensional phenotypes promise to provide an unprecedented window into the complex functions of biological organisms. However, 
+%	Technological advances are causing an explosiong
+%	Technological advances 
+%-High dimensional phenotypes are of great interest
+%-Screening tool for useful traits
+%-Window into unobserved phenotypes
+%-Genetic experiments
+\section{Motivation}
+	Technological advances are leading to a revolution in the collection of phenotype data - from the various *seq technologies (ex RNAseq, ChIPseq, DNase-Seq), to proteomics, metabalomcs, and 3D and hyperspectral imaging. These high-dimensional phenotypes promise to provide an unprecedented window into the complex functions of biological organisms. 
+\subsection{Examples:}
+\begin{itemize}
+\item A set of genetically related individuals are assigned to 2+ treatments and then a large set of traits (such as gene expression) are measured on each individual simultaneously. 
+\item A multi-factor experiment with a split-plot or repeated measures design that are common in agriculture settings.
+\item A case-control studies with individuals of varying ancestry. 
+\end{itemize}
+	
+	In all cases, the experimental goals are to understand which factors are important for sets of the traits, and to identify the biological bases of these effects.
+
+\subsection{Analytical challenges}	
+	In these examples, the analytical challenges are a combination of those that affect univariate quantitative genetic analyses and those that affect the study of high dimensional data:
+\begin{itemize}
+\item Individuals within (and across) treatments are correlated due to shared genetic history.
+\item Traits are correlated and may be functionally related
+\item The number of traits (and between-trait covariances) may be larger than the number of individuals ($n << p$)
+\end{itemize}
+
+\section{Approach}
+We view the high-dimensional phenotype as a readout of a modular and time-ordered developmental process (Figure 1). 
+
+This model has the following implications:
+\begin{itemize}
+\item Experimental factors (genotypes, environments) cause perturbations to the modules of the developmental system.
+\item The traits we observe are independent conditional on the state of the underlying developmental system.
+\item We cannot directly observe the modules, but can indirectly identify them based on a) the correlation they induce among traits in each individual, and b) the correlation of modules across individuals induced by the experimental design and the genetic structure in the population.
+\item The same module might explain responses to multiple experimental factors (Figure 2).
+\end{itemize}
+
+We therefore focus on identifying the most important modules, which we assume will account for the majority of the effect of the experimental factors on the downstream high-dimensional phenotype. 
+
+\section{Model specification}
+\subsection{Sparse factor model}
+Motivated by the conceptual model in Figure 1, we model the $n \times p$ phenotype matrix $\mathbf{Y}$ with a sparse factor model, with $k$ factors representing latent developmental modules:
+\begin{align}
+\mathbf{Y} &= \mathbf{F}\mathbf{\Lambda}' + \mathbf{E}
+\end{align}
+Conditional on the factors, the residuals (rows of $\mathbf{E}$) are independent and assigned Gaussian priors.
+%Sparsity is induced on the elements of the loadings matrix $\mathbf{\Lambda}$ with the infinite factor model of \citep{Bhattacharya:2011gh} which uses both global shrinkage on each column $\mathbf{\lambda}_{.l}$ through $\tau_l$ and local shrinkage on each element $\lambda_{jl}$ through $\psi_{jl}$. Importantly, a prior on the sequence $\{\tau_1\; \tau_2 \; \dots \tau_k\}$ that biases towards increasing values (more shrinkage) for higher index columns is induced by with a hierarchical structure:
+An ``infinite factor"\citep{Bhattacharya:2011gh} prior structure uses local/global shrinkage to induce sparsity on $\mathbf{\Lambda}$, with increasing shrinkage on higher-indexed factors. This induces a ranking of the factors.
+\begin{align}\begin{split}
+\lambda_{jl} &\sim \mbox{N}(0,\tau^{-1}_k \psi^{-1}_{jl}) \\
+\psi_{jl} &\sim \mbox{Ga}(\nu/2,\nu/2) \\
+\delta_1 &\sim \mbox{Ga}(\alpha_0,\beta_0)\; \delta_l \sim \mbox{Ga}(\alpha_1,1) \mbox{ for } l \in {2\dots k} \\
+\tau_l &= \prod_{i=1}^k \delta_l
+\end{split}\end{align}
+
+\subsection{Mixed Effect Model (MEM)}
+Columns of $\mathbf{F}$ represent trait values for each of the $k$ latent modules across the $n$ individuals. We assume that each module is independent and model its variation with a linear mixed effect model:
+\begin{align}
+\mathbf{f}_{.l} &= \mathbf{X} \beta_l + \mathbf{Z}_1 \mathbf{a}_{1l} + \mathbf{Z}_2 \mathbf{a}_{2l} + \mathbf{\epsilon}_l \\
+\beta_l &\sim \mbox{N}_b(\mathbf{0},\sigma^2_{b_l} (\mathbf{X}'\mathbf{X})^{-1}) &&\mbox { Treatment effect} \nonumber \\
+\mathbf{a}_{1l} &\sim \mbox{N}_r(\mathbf{0},\sigma^2_{a_{1l}} \mathbf{A}), \mathbf{a}_{2l} \sim \mbox{N}_r(\mathbf{0},\sigma^2_{a_{2l}} \mathbf{A}) 
+	&&\mbox { Genetic and GxT effects}  \nonumber \\
+\mathbf{\epsilon}_l &\sim \mbox{N}_r(\mathbf{0},\sigma^2_{e_l} \mathbf{I}) &&\mbox { Residual variation}  \nonumber
+\end{align}
+
+
+\subsection{Summary}
+The key features of this specification are:
+\begin{itemize}
+%\item We only describe a single ``fixed" (\emph{e.g.} experimental factor) and a single random (\emph{e.g.} genetic group) factor here, but others (\emph{e.g.} GxE interaction) are added similarly.
+\item Specifying the MEM for $\mathbf{F}$ instead of $\mathbf{Y}$ is a massive reduction of complexity because the number of traits is small $k << p$ and the latent traits are assumed uncorrelated.
+\item We place a simplex prior on the balance among the variance components as a simplex to constrain the total variance of each column (Figure XX). While factors with shared genetic, treatment and residual components are preferred, purely residual factors are allowed.
+\item Given a small $k$, not all variation may be accounted for by the latent factors. We each trait's residual vector (row of $\mathbf{E}$) with a parallel MEM, and place an additional prior $\pi_j$ on the proportion of variation in that trait accounted for by the $k$ factors.
+\end{itemize}
+
+\section{Implementation}
+We have derived a Gibbs sampler to estimate the posterior distribution of all model parameters which we have implemented in R/Rcpp, and also coded the model in Stan.
+
+\section{Data example}
+
+\subsection{Examples:}
+	The specific setting we have in mind is an experiment where a set of genetically related individuals are assigned to 2+ treatments and then a large set of traits (such as gene expression) are measured on each individual simultaneously. 
+	Other settings could be a multi-factor experiment with a split-plot or repeated measures design that are common in agriculture settings, or case-control studies with individuals of varying ancestry. 
+	In all cases, the experimental goals are to understand which factors are important for sets of the traits, and what are the biological bases of these effects.
+	
+	In these examples, the analytical challenges are a combination of those that affect univariate quantitative genetic analyses and those that affect the study of high dimensional data:
+	
+-Individuals within (and across) treatments are correlated due to shared genetic history.
+
+-Traits are correlated and may be functionally related
+
+-The number of traits (and between-trait covariances) may be larger than the number of individuals ($n << p$)
+
+
+	 In each case, the aim is to identify which traits are affected by the experimental factors, but the analysis is complicated by 
+	Such an experiment might be designed to identify 
+	 with the goal of discovering the general and genotype-specific 
+	. But the method should apply to other cases of complex, multi-factor experiments or observational studies where the goal is to study the 
+	The goal is to address the following questions:
+-Which traits are heritable?
+-Which traits responded to the treatment?
+-Is there GxE?
+-Which traits are correlated? What causes the correlations?
+	The analytical challenges in this setting are a combination of those that affect univariate quantitative genetic analyses and those that affect the study of high dimensional data:
+-Individuals within (and across) treatments are correlated due to shared genetic history (captured by the relationship matrix A)
+-Traits are correlated and may be functionally related
+-The number of traits (and between-trait covariances) may be larger than the number of individuals (n << p)
+\section{Model}
+\subsection{Key features}
+-Mixed effect model
+	-comparison to multivariate mixed effect model
+	
+\section{Results}
+
+\section{Conclusions}
+
+\section{Acknowledgements}
+
+%\end{poster}
+
+\bibliography{All_refs}
+\bibliographystyle{plain}
+
+\end{document}  
