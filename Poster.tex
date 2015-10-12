@@ -14,7 +14,7 @@
 \usepackage{setspace}
 \usepackage{multicol}
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
-
+\renewcommand\refname{}
 
 %\title{Brief Article}
 %\author{The Author}
@@ -43,17 +43,14 @@
      \includegraphics[width=0.3\textwidth]{dept_ps_lg_hi-res.png}
  }
  % Title
- {
- \sc\Huge A Bayesian hierarchical sparse factor model for complex experiments in genetical genomics}
+ { \sc\Huge A Bayesian hierarchical sparse factor model for complex experiments in genetical genomics}
  % Authors
- {R Cody Markelz\textsuperscript{1}, Sayan Mukherjee\textsuperscript{2}, Daniel Runcie\textsuperscript{3}} %\\[1em]
- {\small{\textsuperscript{1}Department of Plant Biology and \textsuperscript{3}Department of Plant Sciences, UC Davis. \textsuperscript{2} Department of Statistical Science, Duke University}
+ {RJ Cody Markelz\textsuperscript{1}, Sayan Mukherjee\textsuperscript{2}, Daniel Runcie\textsuperscript{3}} %\\[1em]
+ {\small{\textsuperscript{1}Department of Plant Biology and \textsuperscript{3}Department of Plant Sciences, UC Davis. \textsuperscript{2}Department of Statistical Science, Duke University}
 }
  % University logo
  {
-%  \begin{tabular}{r}
-%    \includegraphics[width=0.12\textwidth]{dept_ps_lg_hi-res.png}
-%  \end{tabular}
+%    \includegraphics[width=0.05\textwidth]{Runcie_photo.jpg}
  }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -167,6 +164,10 @@ We use a Gibbs sampler implemented in R/Rcpp to estimate the posterior distribut
 
 }
 
+\headerbox{Acknowledgements} {name=g,column=2,below = e}{
+We would like to thank Upendra Kumar Devisetty and Julin Maloof for sharing the gene expression data, NSF grants DMS-1418261 and IIS 1546331 to SM and XX to RJCM and the UC Davis Department of Plant Sciences for funding.
+}
+
 \headerbox{Data example} {name=f,column=3,row=0,span=1}{
 \subsection*{Background}
 \subsection*{Results}
@@ -180,10 +181,7 @@ Our model identified five large factors that accounted for the majority of the c
 \textbf{Figure 4.} Among-line genetic variance and response to crowded conditions for each of the five major factors.
 \end{multicols}
 }
-
-
-\headerbox{Acknowledgements} {name=g,column=3,below = f}{
-We would like to thank Upendra Kumar Devisetty and Julin Maloof for sharing the gene expression data, NSF grants DMS-1418261 and IIS 1546331 to SM and XX to RJCM and the UC Davis Department of Plant Sciences for funding.
+\headerbox{References} {name=g,column=3,below=f,span=1}{
 \bibliography{All_refs}
 \bibliographystyle{plain}
 }
