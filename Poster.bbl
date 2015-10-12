@@ -5,6 +5,12 @@ A~Bhattacharya and D~B Dunson.
 \newblock {Sparse Bayesian infinite factor models}.
 \newblock {\em Biometrika}, 98(2):291--306, May 2011.
 
+\bibitem{Carpenter:2015}
+Bob Carpenter, Andrew Gelman, Matt Hoffman, Daniel Lee, Ben Goodrich, Michael
+  betancourt, marcus~A Brubaker, Jiqiang Guo, Peter Li, and Allen Riddell.
+\newblock {Stan: A Probabilistic Programming Language}.
+\newblock {\em J Stat Softw}, 2015.
+
 \bibitem{Runcie:2013ky}
 Daniel Runcie and S~Mukherjee.
 \newblock {Dissecting High-Dimensional Phenotypes with Bayesian Sparse Factor

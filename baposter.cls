@@ -1060,8 +1060,12 @@
       \draw (image.east) node(title)[anchor=west,text width=\baposter@titleimage@textwidth]{%
         \begin{minipage}{\baposter@titleimage@textwidth}%
           \begin{center}%
+          \setstretch{1.8}
           \textbf{\Huge #3}\\%
-          {\Large #4}%
+          \setstretch{1.5}
+          {\Large #4}\\%
+          \setstretch{1.2}
+          {#5}%
           \end{center}%
         \end{minipage}
       };%

@@ -1,4 +1,5 @@
-\documentclass[landscape,a0paper,fontscale=0.35]{baposter}
+\documentclass[landscape,paperwidth=48in,paperheight=36in,fontscale=0.35]{baposter}
+%\documentclass[landscape,a0paper,fontscale=0.35]{baposter}
 %\documentclass[paperwidth=48in,paperheight=36in,fontsize=24pt]{baposter}
 %\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
 %\geometry{}                   % ... or a4paper or a5paper or ... 
@@ -11,6 +12,7 @@
 \usepackage{natbib}
 \usepackage{multirow}
 \usepackage{setspace}
+\usepackage{multicol}
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
 
@@ -38,21 +40,19 @@
  headerheight=0.12\textheight}
  % Eye Catcher
  {
-%      \includegraphics[width=0.08\linewidth]{track_frame_00010_06}
-%      \includegraphics[width=0.08\linewidth]{track_frame_00450_06}
-%      \includegraphics[width=0.08\linewidth]{track_frame_04999_06}
+     \includegraphics[width=0.3\textwidth]{dept_ps_lg_hi-res.png}
  }
  % Title
- {\sc\Huge A Bayesian hierarchical sparse factor model for complex experiments in genetical genomics}
+ {
+ \sc\Huge A Bayesian hierarchical sparse factor model for complex experiments in genetical genomics}
  % Authors
- {R Cody Markelz, Sayan Mukherjee, Daniel Runcie\\[1em]
-% {\texttt{Brian.Amberg@unibas.ch, ab@microsoft.com, Thomas.Vetter@unibas.ch}}
+ {R Cody Markelz\textsuperscript{1}, Sayan Mukherjee\textsuperscript{2}, Daniel Runcie\textsuperscript{3}} %\\[1em]
+ {\small{\textsuperscript{1}Department of Plant Biology and \textsuperscript{3}Department of Plant Sciences, UC Davis. \textsuperscript{2} Department of Statistical Science, Duke University}
 }
  % University logo
  {
 %  \begin{tabular}{r}
-%    \includegraphics[height=0.12\textheight]{logo}\\
-%    \raisebox{0em}[0em][0em]{\includegraphics[height=0.03\textheight]{msrlogo}}
+%    \includegraphics[width=0.12\textwidth]{dept_ps_lg_hi-res.png}
 %  \end{tabular}
  }
 
@@ -70,8 +70,9 @@
 \headerbox{Contribution}{name=a,column=0,row=0,span=2}{
 	We present a modeling framework aimed at studying the contributions of genes and the environment to phenotypic variation in high dimensions. Specifically, we are interested in leveraging high-dimensional phenotypes to study the combined effects of multiple factors on traits like yield in crops, fitness in natural populations, or health in patients. Our approach combines two well established principles: 
 	\begin{itemize}
-	\item That biological systems tend to be modular in organization. 
-	\item That appropriately designed and analyzed experiments are necessary to address complex experimental questions.
+	\item Biological systems tend to be modular in organization. 
+	\item Complex experimental or breeding designs and observational studies of natural populations with structure require flexible hierarchical models.
+%	\item That appropriately designed and analyzed experiments are necessary to address complex experimental questions.
 	\end{itemize}
 
 Building on our earlier genetic sparse factor model \citep{Runcie:2013ky}, we extend the specification to allow a full linear mixed effect model to capture complex experimental designs. Using an efficient Bayesian MCMC algorithm, the model scales well both computationally and numerically to dimensions relevant to modern phenotype-centric datasets and generates descriptions of modules that are interpretable with respect to the environmental or genetic factors. 
@@ -79,20 +80,22 @@ Building on our earlier genetic sparse factor model \citep{Runcie:2013ky}, we ex
 
 \headerbox{Motivation}{name=b,column=0,below = a}{
 %	Technological advances are leading to a revolution in the collection of phenotype data - from the various *seq technologies (ex RNAseq, ChIPseq, DNase-Seq), to proteomics, metabalomcs, and 3D and hyperspectral imaging. 
-	High-dimensional phenotypes (ex RNAseq, metabalomcs,  hyperspectral imaging) promise to provide an unprecedented window into the complex functions of biological organisms. As sample sizes become less limiting, these can be used to address more complex problems:
+	High-dimensional phenotypes (ex RNAseq, metabalomcs,  hyperspectral imaging) promise to provide an unprecedented window into the complex functions of biological organisms. 
+Settings we have in mind include:
 \begin{itemize}
-\item A set of genetically related individuals are assigned to 2+ treatments to assess gene-environment interactions.
+\item A set of genetically related individuals assigned to 2+ treatments to assess gene-environment interactions.
 % and then a large set of traits (such as gene expression) are measured on each individual simultaneously. 
 \item Multi-factor experiments with split-plot or repeated measures designs that are common in agriculture settings.
-\item A case-control studies with individuals of varying ancestry. 
+\item Case-control studies with individuals of varying ancestry. 
 \end{itemize}
 	
-	In all cases, the experimental goals are to identify sets of traits associated with each experimental factor, and to understand the biological bases of these effects.
+	In each case the experimental goals are to identify sets of traits associated with each experimental factor and to understand the biological bases of these effects.
 }
 \headerbox{Analytical challenges}{name=c,column=1,below = a}{
 	In these examples, the analytical challenges are a combination of those that affect univariate quantitative genetic analyses and those that affect the study of high dimensional data:
 \begin{itemize}
 \item Individuals within (and across) treatments are correlated due to shared genetic history.
+\item Interactions (ex. Genotype x Treatment) greatly increase the number of parameters for each trait.
 \item Traits are correlated and may be functionally related
 \item The number of traits (and between-trait covariances) may be larger than the number of individuals ($n << p$)
 \end{itemize}
@@ -109,6 +112,18 @@ This model has the following implications:
 \end{itemize}
 
 We therefore focus on identifying the most important modules, which we assume will account for the majority of the effect of the experimental factors on the downstream high-dimensional phenotype. 
+
+\begin{multicols}{2}
+\begin{center}
+\includegraphics[width=0.825\columnwidth]{Figure1.pdf} 
+\end{center}
+\textbf{Figure 1.} We assume that the influence of genotype and treatment on the observed traits $\mathbf{y}_j$ is mediated through developmental modules $\mathbf{f}_l$.
+\newpage
+\begin{center}
+\includegraphics[width=1\columnwidth]{Figure2.pdf} 
+\end{center}
+\textbf{Figure 2.} When treatment and residual correlations align (as in \textbf{A} but not \textbf{B}) the same factor can explain variation in both traits.
+\end{multicols}
 }
 \headerbox{Model specification} {name=e,column=2,row=0,span=1}{
 \subsection*{Sparse factor model}
@@ -129,7 +144,7 @@ Sparsity in the factor loadings $\pmb{\lambda}_l$ is induced with an ``infinite 
 \subsection*{Mixed Effect Model (MEM)}
 Vectors $\mathbf{f}_l$ represent trait values across the $n$ individuals for each of the $k$ latent modules. We assume that each module is independent and model its variation with a linear mixed effect model:
 \begin{align}
-\mathbf{f}_{l} &= \mathbf{X} \beta_l + \mathbf{Z}_1 \mathbf{a}_{1l} + \mathbf{Z}_2 \mathbf{a}_{2l} + \mathbf{\epsilon}_l \\
+\mathbf{f}_{l} &= \mathbf{X} \beta_l + \mathbf{Z}_1 \mathbf{a}_{1l} + \mathbf{Z}_2 \mathbf{a}_{2l} + \boldsymbol{\epsilon}_l \\
 \beta_l &\sim \mbox{N}_b(\mathbf{0},\sigma^2_{b_l} (\mathbf{X}'\mathbf{X})^{-1}) &&\mbox { Treatment effect} \nonumber \\
 \mathbf{a}_{1l} &\sim \mbox{N}_r(\mathbf{0},\sigma^2_{a_{1l}} \mathbf{A}), \mathbf{a}_{2l} \sim \mbox{N}_r(\mathbf{0},\sigma^2_{a_{2l}} \mathbf{A}) 
 	&&\mbox { G and GxT effects}  \nonumber \\
@@ -143,12 +158,12 @@ The key features of this specification are:
 \begin{itemize}
 %\item We only describe a single ``fixed" (\emph{e.g.} experimental factor) and a single random (\emph{e.g.} genetic group) factor here, but others (\emph{e.g.} GxE interaction) are added similarly.
 \item Specifying the MEM for $\mathbf{f}_l$ instead of $\mathbf{y}_j$ is a massive reduction of complexity because the number of traits is small $k << p$ and the latent traits are assumed uncorrelated.
-\item While factors with shared genetic, treatment and residual components are preferred, purely residual factors are allowed.
+\item While factors with shared genetic, treatment and residual components are preferred (Figure 2), purely residual factors are allowed.
 %We place a simplex prior on the balance among the variance components as a simplex to constrain the total variance of each column (Figure XX). 
-\item Given a small $k$, not all variation may be accounted for by the latent factors. We each trait's residual vector (row of $\mathbf{E}$) with a parallel MEM, and place an additional prior $\pi_j$ on the proportion of variation in that trait accounted for by the $k$ factors.
+\item Given a small $k$, not all variation may be accounted for by the latent factors. We model each trait's residual vector (row of $\mathbf{E}$) with a parallel MEM, and place an additional prior $\pi_j$ on the proportion of variation in that trait accounted for by the $k$ factors.
 \end{itemize}
 \subsection*{Implementation}
-We have derived a Gibbs sampler to estimate the posterior distribution of all model parameters which we have implemented in R/Rcpp, and also coded the model in Stan.
+We use a Gibbs sampler implemented in R/Rcpp to estimate the posterior distribution of all model parameters and also coded the model in Stan\citep{Carpenter:2015}.
 
 }
 
@@ -160,8 +175,7 @@ We have derived a Gibbs sampler to estimate the posterior distribution of all mo
 
 
 \headerbox{Acknowledgements} {name=g,column=3,below = f}{
-
-
+We would like to thank Upendra Kumar Devisetty and Julin Maloof for sharing the gene expression data, NSF grants DMS-1418261 and IIS 1546331 to SM and XX to RJCM and the UC Davis Department of Plant Sciences for funding.
 \bibliography{All_refs}
 \bibliographystyle{plain}
 }
