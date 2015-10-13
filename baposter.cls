@@ -501,7 +501,8 @@
   textborder=faded,
   boxpadding=0.5em,
   % header
-  headerfont=\scshape\Large,% or headerfont=\color{white}\textsf\textbf
+%  headerfont=\scshape\Large,% or 
+  headerfont=\textsf\textbf\Large,
   headerFontColor=black,
   headerColorOne=red,
   headerColorTwo=brown,
