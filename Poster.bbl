@@ -6,14 +6,16 @@
   infinite factor models}.
 \newblock Biometrika~{\em 98\/}(2)\textbf{:}\ 291--306.
 
-\bibitem[\protect\citeauthoryear{Bob~Carpenter}{\textsc{Bob~Carpenter}}{2015}]{Carpenter:2015}
-\textsc{Bob~Carpenter, e.}, 2015\ \ {Stan: A Probabilistic Programming
-  Language}.
+\bibitem[\protect\citeauthoryear{Carpenter {\it et~al.}}{\textsc{Carpenter}
+  {\em et~al.}}{2015}]{Carpenter:2015}
+\textsc{Carpenter, B.} and \textsc{others}, 2015\ \ {Stan: A Probabilistic
+  Programming Language}.
 \newblock J Stat Softw.
 
-\bibitem[\protect\citeauthoryear{Kazunari~Nozue}{\textsc{Kazunari~Nozue}}{2015}]{Nozue:2015dt}
-\textsc{Kazunari~Nozue, e.}, 2015\ \ {Shade avoidance components and pathways
-  in adult plants revealed by phenotypic profiling.}
+\bibitem[\protect\citeauthoryear{Nozue {\it et~al.}}{\textsc{Nozue} {\em
+  et~al.}}{2015}]{Nozue:2015dt}
+\textsc{Nozue, K.} and \textsc{others}, 2015\ \ {Shade avoidance components and
+  pathways in adult plants revealed by phenotypic profiling.}
 \newblock PLoS Genet.~{\em 11\/}(4)\textbf{:}\ e1004953.
 
 \bibitem[\protect\citeauthoryear{Runcie and Mukherjee}{\textsc{Runcie} and

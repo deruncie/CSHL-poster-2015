@@ -1,0 +1,62 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  12 OCT 2015 12:54
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**baposter.cls
+(./baposter.cls
+LaTeX2e <2014/05/01>
+Babel <3.9k> and hyphenation patterns for 78 languages loaded.
+
+LaTeX Warning: You have requested package `',
+               but the package provides `baposter'.
+
+Package: baposter 2011/11/26 v2.0 baposter class
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+baposter: Brian Amberg, 2007, 2008, 2009, 2010, 2011 | http://www.brian-amberg.
+de/uni/poster/
+baposter: Reinhold Kainhofer, 2011 | http://reinhold.kainhofer.com/
+
+./baposter.cls:117: LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.117 \newlength{\baposter@basepaperwidth}
+                                          
+? 
+./baposter.cls:117: Emergency stop.
+ ...                                              
+                                                  
+l.117 \newlength{\baposter@basepaperwidth}
+                                          
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+ 
+Here is how much of TeX's memory you used:
+ 198 strings out of 493117
+ 2249 string characters out of 6135433
+ 52909 words of memory out of 5000000
+ 3752 multiletter control sequences out of 15000+600000
+ 3640 words of font info for 14 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 23i,0n,17p,219b,36s stack positions out of 5000i,500n,10000p,200000b,80000s
+./baposter.cls:117:  ==> Fatal error occurred, no output PDF file produced!

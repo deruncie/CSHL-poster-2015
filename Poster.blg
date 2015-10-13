@@ -7,24 +7,24 @@ Warning--no number and no volume in Carpenter:2015
 Warning--page numbers missing in Carpenter:2015
 You've used 4 entries,
             2869 wiz_defined-function locations,
-            649 strings with 5535 characters,
-and the built_in function-call counts, 2717 in all, are:
-= -- 230
-> -- 156
+            649 strings with 5519 characters,
+and the built_in function-call counts, 3025 in all, are:
+= -- 262
+> -- 208
 < -- 0
-+ -- 44
-- -- 60
-* -- 267
-:= -- 470
++ -- 64
+- -- 80
+* -- 295
+:= -- 522
 add.period$ -- 8
 call.type$ -- 4
 change.case$ -- 22
 chr.to.int$ -- 4
 cite$ -- 6
-duplicate$ -- 96
-empty$ -- 194
-format.name$ -- 68
-if$ -- 496
+duplicate$ -- 98
+empty$ -- 196
+format.name$ -- 88
+if$ -- 562
 int.to.chr$ -- 1
 int.to.str$ -- 0
 missing$ -- 4
@@ -34,10 +34,10 @@ pop$ -- 14
 preamble$ -- 1
 purify$ -- 50
 quote$ -- 0
-skip$ -- 83
+skip$ -- 95
 stack$ -- 0
 substring$ -- 154
-swap$ -- 49
+swap$ -- 51
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
