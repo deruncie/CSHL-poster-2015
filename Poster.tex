@@ -168,25 +168,42 @@ We use a Gibbs sampler implemented in R/Rcpp to estimate the posterior distribut
 }
 
 \headerbox{Acknowledgements} {name=g,column=2,below = e}{
-We would like to thank Upendra Kumar Devisetty and Julin Maloof for sharing the gene expression data, NSF grants DMS-1418261 and IIS 1546331 to SM and XX to RJCM and the UC Davis Department of Plant Sciences for funding.
+We would like to thank Upendra K Devisetty and Julin Maloof for sharing the gene expression data, NSF grants DMS-1418261 and IIS 1546331 to SM and IOS-1402495 to RJCM and the UC Davis Department of Plant Sciences for funding.
 }
 
 \headerbox{Data example} {name=f,column=3,row=0,span=1}{
 \subsection*{Background}
+
+\begin{multicols}{2}
+When plants grow in close proximity to one another they alter their development and physiology to compete for light at the top of the canopy having negative consequences on final yield. This response is regulated through the shade avoidance pathway involving a large gene network of transcription factors, hormone biosynthesis genes and metabolic genes. We have subset a large genetical genomics dataset collected on a recombinant inbred line (RIL) population of $Brassica$  $rapa$ grown in either crowded or uncrowded conditions in the field to examine known shade avoidance genes [Kazu reference]. 
+\newpage
+\begin{center}
+\includegraphics[width=1\columnwidth]{UN_CR_Fruit_regression.pdf} 
+\end{center}
+\textbf{Figure 4.} Comparison of per plant fruit number on a subset of genotypes from the $Brassica$  $rapa$ RIL population grown in crowded or uncrowded field conditions.
+\end{multicols}
+
 \subsection*{Results}
 
 \begin{multicols}{2}
 Our model identified five large factors that accounted for the majority of the covariance in the data. 
+Interestingly, the two genes that have the greatest positive factor loadings for factor three are PHYA (PHYTOCHROME A) a photoreceptor gene involved in shade detection, and a gene that regulates expression of PHYA, SPA (SUPPRESSOR OF PHYA). 
+
+The factor loadings for factor one include a top positive loading gene, TAA1 (TRYPTOPHAN AMINOTRANSFERASE OF ARABIDOPSIS 1), an auxin biosynthesis gene, and a top negative loading gene, PIN3 (PIN-FORMED 3), is an auxin transport gene. 
+
+These modeling results are promising that the loadings explaining either large genetic or treatment effects are selecting known subnetworks involved in the shade avoidance pathway.
 \newpage
 \begin{center}
 \includegraphics[width=1\columnwidth]{Figure_factors2.pdf} 
 \end{center}
-\textbf{Figure 4.} Among-line genetic variance and response to crowded conditions for each of the five major factors.
+\textbf{Figure 5.} Among-line genetic variance and response to crowded conditions for each of the five major factors.
 \end{multicols}
 }
 \headerbox{References} {name=g,column=3,below=f,span=1}{
 \bibliography{All_refs}
 \bibliographystyle{plain}
+% kazu's paper is here. 
+% http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1004953
 }
 
 \end{poster}
